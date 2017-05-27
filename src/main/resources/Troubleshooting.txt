@@ -1,0 +1,10 @@
+Troubleshooting
+
+"Could not invoke constructor for ..."
+The class could not be found.
+Perhaps the path to the class-Files is not correct.
+When your file structure is like this: /Users/John/fitnesse/target/classes/com/......
+Your path (!path) in FitNesse should be /Users/John/fitnesse/target/classes
+
+
+

@@ -1,0 +1,1 @@
+cp -R ~/Development/git/fitnessetryout/target/*.jar ~/Applications/fitnesse/FitNesseRoot/FixtureCode
