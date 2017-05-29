@@ -3,8 +3,11 @@ package com.ogrampp.fitnessetryout.dvr.fixtures;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddProgramsToSchedule {
+	private static List<ISendung> sendungen = new ArrayList<ISendung>();
 	private String name;
 	private String episode;
 	private LocalDate date;
@@ -37,6 +40,11 @@ public class AddProgramsToSchedule {
 	}
 	
 	public boolean created(){
+		boolean isConflict = sendungen.stream().anyMatch(e -> e.getChannel() == this.channel);
+		if (isConflict)
+			return false;
+		
+		sendungen.add(new Sendung(this.name, this.episode, this.date, this.startTime, this.minutes, this.channel));
 		return true;
 	}
 }
