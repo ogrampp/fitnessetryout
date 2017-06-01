@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddProgramsToSchedule {
-	private static List<TimeSlot> sendungen = new ArrayList<TimeSlot>();
+	private Schedule schedule = new Schedule();
 	private String name;
 	private String episode;
 	private LocalDateTime startDateTime;
 	private int minutes;
 	private int channel;
+	private String lastId;
 
 	public void setName(String n){
 		this.name = n;
@@ -33,13 +34,17 @@ public class AddProgramsToSchedule {
 		this.minutes = m;
 	}
 	
-	public boolean created(){
-		TimeSlot timeSlot = new TimeSlot(this.channel, this.startDateTime, this.minutes);
-		boolean isConflict = sendungen.stream().anyMatch(e -> timeSlot.conflictsWith(e));
-		if (isConflict)
+	public boolean created() {
+		try {
+			schedule.addProgram(this.name, this.episode, this.channel, this.startDateTime, this.minutes);
+		} catch (ConflictingProgramExcepiton e) {
 			return false;
+		}
 		
-		sendungen.add(timeSlot);
 		return true;
+	}
+	
+	public String lastId(){
+		return lastId;
 	}
 }
