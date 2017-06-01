@@ -5,16 +5,20 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Schedule {
-	private List<TimeSlot> scheduledTimeSlots = new LinkedList<TimeSlot>();
+	private List<Program> scheduledPrograms = new LinkedList<Program>();
 	
-	public void addProgram(String programName, String episodeName, int channel, LocalDateTime startDateTime, int lengthInMinutes) throws ConflictingProgramExcepiton{
+	public Program addProgram(String programName, String episodeName, int channel, LocalDateTime startDateTime, int lengthInMinutes) throws ConflictingProgramExcepiton{
 		TimeSlot timeSlot = new TimeSlot(channel, startDateTime, lengthInMinutes);
 		
-		boolean isConflict = this.scheduledTimeSlots.stream().anyMatch(e -> timeSlot.conflictsWith(e));
+		boolean isConflict = this.scheduledPrograms.stream().anyMatch(e -> timeSlot.conflictsWith(e.timeSlot));
 		
 		if (isConflict)
 			throw new ConflictingProgramExcepiton();
 		
-		scheduledTimeSlots.add(timeSlot);
+		Program program = new Program(programName, episodeName, timeSlot);
+		
+		scheduledPrograms.add(program);
+		
+		return program;
 	}
 }

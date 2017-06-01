@@ -36,8 +36,10 @@ public class AddProgramsToSchedule {
 	
 	public boolean created() {
 		try {
-			schedule.addProgram(this.name, this.episode, this.channel, this.startDateTime, this.minutes);
+			Program program = schedule.addProgram(this.name, this.episode, this.channel, this.startDateTime, this.minutes);
+			this.lastId = program.getId();
 		} catch (ConflictingProgramExcepiton e) {
+			this.lastId = "n/a";
 			return false;
 		}
 		
