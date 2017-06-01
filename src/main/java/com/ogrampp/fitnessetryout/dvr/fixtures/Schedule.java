@@ -3,6 +3,7 @@ package com.ogrampp.fitnessetryout.dvr.fixtures;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 public class Schedule {
 	private List<Program> scheduledPrograms = new LinkedList<Program>();
@@ -20,5 +21,11 @@ public class Schedule {
 		scheduledPrograms.add(program);
 		
 		return program;
+	}
+
+	public void removeProgramById(String id) {
+		Optional<Program> p = this.scheduledPrograms.stream().filter(e -> e.getId().equals(id)).findFirst();
+		if (p.isPresent())
+			scheduledPrograms.remove(p.get());
 	}
 }

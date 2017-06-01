@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddProgramsToSchedule {
-	private Schedule schedule = new Schedule();
+	private static Schedule schedule = new Schedule();
 	private String name;
 	private String episode;
 	private LocalDateTime startDateTime;
@@ -14,6 +14,10 @@ public class AddProgramsToSchedule {
 	private int channel;
 	private String lastId;
 
+	public static Schedule getSchedule(){
+		return schedule;
+	}
+	
 	public void setName(String n){
 		this.name = n;
 	}
