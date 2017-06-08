@@ -39,4 +39,9 @@ public class Schedule {
 		
 		return result;
 	}
+
+	public void clear() {
+		// TODO Auto-generated method stub
+		scheduledPrograms.clear();
+	}
 }
