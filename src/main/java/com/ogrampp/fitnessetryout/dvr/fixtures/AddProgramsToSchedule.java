@@ -5,6 +5,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ogrampp.fitnessetryout.dvr.domain.ConflictingProgramException;
+import com.ogrampp.fitnessetryout.dvr.domain.Program;
+import com.ogrampp.fitnessetryout.dvr.domain.Schedule;
+
 public class AddProgramsToSchedule {
 	private static Schedule schedule = new Schedule();
 	private String name;
@@ -13,6 +17,11 @@ public class AddProgramsToSchedule {
 	private int minutes;
 	private int channel;
 	private String lastId;
+	private boolean lastCreationSuccessfull;
+	
+	public AddProgramsToSchedule(){
+		System.out.println("AddProgramToSchedult created!");
+	}
 
 	public static Schedule getSchedule(){
 		return schedule;
@@ -38,19 +47,25 @@ public class AddProgramsToSchedule {
 		this.minutes = m;
 	}
 	
-	public boolean created() {
+	public void execute(){
 		try {
 			Program program = schedule.addProgram(this.name, this.episode, this.channel, this.startDateTime, this.minutes);
 			this.lastId = program.getId();
-		} catch (ConflictingProgramExcepiton e) {
+			this.lastCreationSuccessfull = true;
+		} catch (ConflictingProgramException e) {
 			this.lastId = "n/a";
-			return false;
+			this.lastCreationSuccessfull = false;
+			return;
 		}
-		
-		return true;
+	}
+	
+	public boolean created() {
+		return this.lastCreationSuccessfull;
 	}
 	
 	public String lastId(){
-		return lastId;
+		if (this.lastCreationSuccessfull)
+			return lastId;
+		return "n/a";
 	}
 }

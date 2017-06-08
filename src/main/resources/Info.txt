@@ -1,0 +1,6 @@
+1. For each decision table the fixture will be instantiated. 
+To make the data of a fixture reusable in other decision tables make the variables storing the information static or use
+a IoC container.
+2. To reference data in another decision table support ID's (for example by support a method lastId())
+and store the id in a variable with the statement $[VARIABLE]=. Later you can use $[VARIABLE] to access the id.
+3. to execute a test implement public void execute(). It's a method of the slim protocol.

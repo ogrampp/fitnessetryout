@@ -1,4 +1,4 @@
-package com.ogrampp.fitnessetryout.dvr.fixtures;
+package com.ogrampp.fitnessetryout.dvr.domain;
 
 import java.time.LocalDateTime;
 
